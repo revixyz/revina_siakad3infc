@@ -16,38 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `admin`
---
-
-DROP TABLE IF EXISTS `admin`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `admin` (
-  `id_admin` int NOT NULL AUTO_INCREMENT,
-  `id` int NOT NULL,
-  `id_dosen` int NOT NULL,
-  `prodi` varchar(30) NOT NULL,
-  `bimbingan` varchar(50) NOT NULL,
-  `tgl_bimbingan` datetime NOT NULL,
-  PRIMARY KEY (`id_admin`),
-  KEY `id` (`id`),
-  KEY `id_dosen` (`id_dosen`),
-  CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`id`) REFERENCES `mhs` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `admin_ibfk_2` FOREIGN KEY (`id_dosen`) REFERENCES `dosen` (`id_dosen`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `admin`
---
-
-LOCK TABLES `admin` WRITE;
-/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
-INSERT INTO `admin` VALUES (1,12,1,'Informatika','Konsultasi KRS','2025-11-30 04:35:09'),(2,15,3,'Arsitektur','Konsultasi masalah studi','2025-11-30 04:36:10');
-/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `dosen`
 --
 
@@ -61,7 +29,7 @@ CREATE TABLE `dosen` (
   `gender` enum('P','L') NOT NULL,
   `email` varchar(30) NOT NULL,
   PRIMARY KEY (`id_dosen`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +38,7 @@ CREATE TABLE `dosen` (
 
 LOCK TABLES `dosen` WRITE;
 /*!40000 ALTER TABLE `dosen` DISABLE KEYS */;
-INSERT INTO `dosen` VALUES (1,12345,'Revina','P','revina@gmail.com'),(2,2345,'Indah','P','indah@gmail.com'),(3,1122,'Wulandari','P','wulandari@gmail.com');
+INSERT INTO `dosen` VALUES (3,1122,'Wulandari','P','wulandari@gmail.com'),(6,1122,'Saya','L','njasnxja@gmail.com');
 /*!40000 ALTER TABLE `dosen` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +58,7 @@ CREATE TABLE `mhs` (
   `prodi` int NOT NULL,
   `waktu` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,8 +67,40 @@ CREATE TABLE `mhs` (
 
 LOCK TABLES `mhs` WRITE;
 /*!40000 ALTER TABLE `mhs` DISABLE KEYS */;
-INSERT INTO `mhs` VALUES (7,'244110601148','WULANDARI','P','Jakarta',1,'2025-11-09 14:19:10'),(10,'244110601148','REVINA ','P','Purwokerto',3,'2025-11-08 14:27:25'),(12,'244110601148','INDAH','P','Bandung',2,'2025-11-08 14:27:51'),(13,'244110601148','REVINA INDAH WULANDARI','P','Purbalingga',2,'2025-11-09 14:18:49'),(14,'222','Saya','L','Jakarta',3,'2025-11-16 11:17:28'),(15,'9989','Farhan','L','Bandung',2,'2025-11-16 11:19:37');
+INSERT INTO `mhs` VALUES (7,'244110601148','WULANDARI','P','Jakarta',1,'2025-11-09 14:19:10'),(10,'244110601148','REVINA ','P','Purwokerto',3,'2025-11-08 14:27:25'),(12,'244110601148','INDAH','P','Bandung',2,'2025-11-08 14:27:51'),(15,'9989','vina','P','Bandung',2,'2025-12-02 13:02:06');
 /*!40000 ALTER TABLE `mhs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_admin`
+--
+
+DROP TABLE IF EXISTS `tb_admin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_admin` (
+  `id_admin` int NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL,
+  `id_dosen` int NOT NULL,
+  `prodi` varchar(30) NOT NULL,
+  `bimbingan` varchar(50) NOT NULL,
+  `tgl_bimbingan` date NOT NULL,
+  PRIMARY KEY (`id_admin`),
+  KEY `id` (`id`),
+  KEY `id_dosen` (`id_dosen`),
+  CONSTRAINT `tb_admin_ibfk_1` FOREIGN KEY (`id`) REFERENCES `mhs` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  CONSTRAINT `tb_admin_ibfk_2` FOREIGN KEY (`id_dosen`) REFERENCES `dosen` (`id_dosen`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_admin`
+--
+
+LOCK TABLES `tb_admin` WRITE;
+/*!40000 ALTER TABLE `tb_admin` DISABLE KEYS */;
+INSERT INTO `tb_admin` VALUES (1,15,6,'Informatika','Konsultasi KRS','2025-12-05'),(2,10,3,'Arsitektur','Konsultasi masalah studi','2025-12-05'),(6,7,6,'Arsitektur','Konsultasi Akademik','2025-12-24');
+/*!40000 ALTER TABLE `tb_admin` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -138,4 +138,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-11-30 11:51:18
+-- Dump completed on 2025-12-05 12:00:45
